@@ -84,3 +84,7 @@ function example_update_all_latlngs(){
 add_action('after_switch_theme', 'example_update_all_latlngs');
 ```
 
+## To-do
+
+1. Add geocoding using Nominatim service
+2. Add a `the_distance()` function for use in templates
