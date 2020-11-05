@@ -51,18 +51,36 @@ It looks for two [custom field](https://wordpress.org/support/article/custom-fie
 
 It's agnostic about how you supply this data. The simplest thing to do is type it in using WordPress's built-in custom field editor.
 
-You could also hook into the `save_post` action to populate meta:
+You could also hook into the `save_post` action to populate meta, by adding a snippet like this to your theme's `functions.php`:
 
 ```
-function example_handle_latlongs($post_id, $post){
+function example_update_latlngs($post_id, $post){
     $location = get_field("location", $post);
-    if($location){
+    if(isset($location)){
         update_post_meta($post, "longitude", $location["lng"]);
         update_post_meta($post, "latitude", $location["lat"]);
     }
 }
 
-add_action("save_post", "example_handle_latlongs", 10, 3);`
+add_action("save_post", "example_update_latlngs", 10, 3);`
 ```
 
 This example assumes you are using an [ACF Google Map](https://www.advancedcustomfields.com/resources/google-map/) field called "location", but the data could come from anywhere, including a custom meta box you code yourself, so long as the post meta keys are right.
+
+### Bulk-updating existing posts
+
+If you have many posts that you need to add longitude and latitude meta to in bulk, you could run some code like this on theme activation:
+
+```
+function example_update_all_latlngs(){
+    $query = new WP_Query(array(
+        "posts_per_page" => -1
+    ));
+    foreach($query->get_posts() as $post){
+        gs_update_latlngs($post);
+    }
+}
+
+add_action('after_switch_theme', 'example_update_all_latlngs');
+```
+
