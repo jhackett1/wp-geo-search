@@ -1,10 +1,14 @@
-# WP geo search
+# 🌍 WP geo search
 
-Plugin to add location-aware geographical search to WP_Query.
+A plugin to add location-aware geographical search to [WP_Query](https://developer.wordpress.org/reference/classes/wp_query/).
 
-## Using it in a query
+You can use it to power location-aware apps, such as showing a user results near them.
+
+## 🔎 Using it in a query
 
 Adding a `geo_query` parameter to WP_Query will add a "distance" column to the returned results, provided they have the right metadata.
+
+You can then display this in your templates.
 
 ```
 $query = new WP_Query(array(
@@ -15,7 +19,7 @@ $query = new WP_Query(array(
 ))
 ```
 
-Optionally, you can then filter by radius.
+Optionally, you can then filter by search radius.
 
 By default, distances are given in miles. You can provide `"units" => "km"` if you need kilometres.
 
@@ -24,12 +28,12 @@ $query = new WP_Query(array(
     "geo_query" => array(
             "latitude" => -52.005,
             "longitude" => 0.005,
-            "within" => 10
+            "radius" => 10
     )
 ))
 ```
 
-Or order by distance:
+Or order by nearness:
 
 ```
 $query = new WP_Query(array(
@@ -41,11 +45,11 @@ $query = new WP_Query(array(
 ))
 ```
 
-## Providing latitude and longitude data
+## 📍 Populating latitude and longitude data
 
-It looks for two custom field values with the keys `latitude` and `longitude` on your posts.
+It looks for two [custom field](https://wordpress.org/support/article/custom-fields/) values with the keys `latitude` and `longitude` on your posts.
 
-It's agnostic about how you supply this data. The simplest thing to do is add it using WordPress's built-in custom field editor.
+It's agnostic about how you supply this data. The simplest thing to do is type it in using WordPress's built-in custom field editor.
 
 You could also hook into the `save_post` action to populate meta:
 
@@ -61,4 +65,4 @@ function example_handle_latlongs($post_id, $post){
 add_action("save_post", "example_handle_latlongs", 10, 3);`
 ```
 
-This example assumes you are using an ACF Google Map field called "location", but the data could come from anywhere, so long as the meta keys are `longitude` and `latitude`.
+This example assumes you are using an [ACF Google Map](https://www.advancedcustomfields.com/resources/google-map/) field called "location", but the data could come from anywhere, including a custom meta box you code yourself, so long as the post meta keys are right.
