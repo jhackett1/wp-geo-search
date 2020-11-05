@@ -69,7 +69,7 @@ This example assumes you are using an [ACF Google Map](https://www.advancedcusto
 
 ### Bulk-updating existing posts
 
-If you have many posts that you need to add longitude and latitude meta to in bulk, you could run some code like this on theme activation:
+If you have many posts that you need to add longitude and latitude meta to in bulk, you could add something like this to `functions.php`, which will run on [theme activation](https://developer.wordpress.org/reference/hooks/after_switch_theme/):
 
 ```
 function example_update_all_latlngs(){
