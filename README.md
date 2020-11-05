@@ -10,7 +10,16 @@ Adding a `geo_query` parameter to WP_Query will add a "distance" column to the r
 
 You can then display this in your templates.
 
+You can use a location search parameter, which will be [geocoded](#geocoding) or directly provide latitude and longitude values:
+
+
 ```
+$query = new WP_Query(array(
+    "geo_query" => array(
+            "location" => "London"
+    )
+))
+
 $query = new WP_Query(array(
     "geo_query" => array(
             "latitude" => -52.005,
@@ -61,6 +70,12 @@ In a `WP_Query` loop that includes a `geo_query`, you can use two extra function
 If you need to use different units or translations, can pass three [printf-formatted](https://www.php.net/manual/en/function.printf.php) strings to `the_distance()` to override these messages. Put `%s` where you want the value.
 
 If you need the _exact_, unrounded value, you can use `$post->distance`.
+
+### Geocoding
+
+[Nominatim](https://nominatim.org/)'s service is used for geocoding location searches.
+
+Using it is subject to an acceptable use policy - if you use case will involve lots of API calls, you should replace it with a paid alternative, like [Google](https://developers.google.com/maps/documentation/geocoding/overview)'s.
 
 ## 📍 Populating latitude and longitude data
 

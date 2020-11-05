@@ -8,6 +8,7 @@ Plugin URI: jayehackett.com
 */
 
 require "template.php";
+require "geocoder.php";
 
 function earth_radius($query){
     if(isset($query->get("geo_query")["units"]) && $query->get("geo_query")["units"] == "km") return 6371;
@@ -15,7 +16,7 @@ function earth_radius($query){
 }
 
 function gs_handle_geo_select($select_clause, $query) {
-    if($query->get("geo_query")){
+    if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"])){
 
         $earth_radius = earth_radius($query);
 
@@ -43,7 +44,7 @@ add_filter('posts_fields','gs_handle_geo_select', 10, 2);
 
 
 function gs_handle_geo_joins($join_clause, $query) {
-    if($query->get("geo_query")){
+    if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"])){
         $join_clause .= "       
             LEFT JOIN wp_postmeta lats
                 ON wp_posts.id = lats.post_id
@@ -61,7 +62,7 @@ add_filter('posts_join_paged','gs_handle_geo_joins', 10, 2);
 
 
 function gs_handle_geo_where($where_clause, $query){
-    if($query->get("geo_query") && isset($query->get("geo_query")["radius"])){
+    if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["radius"])){
 
         $earth_radius = earth_radius($query);
 
@@ -85,7 +86,7 @@ add_filter("posts_where", "gs_handle_geo_where", 10, 2);
 
 
 function gs_handle_geo_orderby($orderby_clause, $query) {
-    if($query->get("geo_query")){
+    if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"])){
         $orderby_clause = "-distance DESC";
     }
     return $orderby_clause;
