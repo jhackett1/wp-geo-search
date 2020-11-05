@@ -51,7 +51,7 @@ It looks for two [custom field](https://wordpress.org/support/article/custom-fie
 
 It's agnostic about how you supply this data. The simplest thing to do is type it in using WordPress's built-in custom field editor.
 
-You could also hook into the `save_post` action to populate meta, by adding a snippet like this to your theme's `functions.php`:
+You could also hook into the `save_post` action to populate meta whenever you create or change a post, by adding a snippet like this to your theme's `functions.php`:
 
 ```
 function example_update_latlngs($post_id, $post){
@@ -62,7 +62,7 @@ function example_update_latlngs($post_id, $post){
     }
 }
 
-add_action("save_post", "example_update_latlngs", 10, 3);`
+add_action("save_post", "example_update_latlngs", 10, 3);
 ```
 
 This example assumes you are using an [ACF Google Map](https://www.advancedcustomfields.com/resources/google-map/) field called "location", but the data could come from anywhere, including a custom meta box you code yourself, so long as the post meta keys are right.
