@@ -47,10 +47,10 @@ $query = new WP_Query(array(
 
 ### Displaying distance in templates
 
-In the loop that includes a `geo_query`, you can use two extra functions to show distance information:
+In a `WP_Query` loop that includes a `geo_query`, you can use two extra functions to show distance away:
 
-- `get_the_distance()` - which returns a rounded integer for the distance away
-- `the_distance()` - which displays an approximate human-readable string
+- `get_the_distance(object $post)` - which returns a rounded integer for the distance away, similar to `get_the_title()`
+- `the_distance(string $less_than_one, string $one, string $more_than_one)` - which displays an approximate human-readable string, similar to `the_title()`
 
 `the_distance` will show one of three messages depending on whether the rounded distance is less than one, one, or greater than one. By default these are:
 
@@ -60,7 +60,7 @@ In the loop that includes a `geo_query`, you can use two extra functions to show
 
 If you need to use different units or translations, can pass three [printf-formatted](https://www.php.net/manual/en/function.printf.php) strings to `the_distance()` to override these messages. Include %s to print the value.
 
-If you need the _exact_ float value, you can use `$post->distance`.
+If you need the _exact_, unrounded value, you can use `$post->distance`.
 
 ## 📍 Populating latitude and longitude data
 
