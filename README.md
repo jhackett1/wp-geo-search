@@ -94,7 +94,8 @@ function example_update_all_latlngs(){
         "posts_per_page" => -1
     ));
     foreach($query->get_posts() as $post){
-        gs_update_latlngs($post);
+        // Function from above
+        example_update_latlngs($post);
     }
 }
 
