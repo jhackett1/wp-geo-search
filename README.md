@@ -58,7 +58,7 @@ In a `WP_Query` loop that includes a `geo_query`, you can use two extra function
 - "About a mile away"
 - "About %s miles away"
 
-If you need to use different units or translations, can pass three [printf-formatted](https://www.php.net/manual/en/function.printf.php) strings to `the_distance()` to override these messages. Include %s to print the value.
+If you need to use different units or translations, can pass three [printf-formatted](https://www.php.net/manual/en/function.printf.php) strings to `the_distance()` to override these messages. Put `%s` where you want the value.
 
 If you need the _exact_, unrounded value, you can use `$post->distance`.
 
