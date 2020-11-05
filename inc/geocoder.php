@@ -12,12 +12,12 @@ function geocode($query){
 
 function handle_geocoding($query){
     if(isset($query->get("geo_query")["location"])){
-        $geometry = geocode($query->get("geo_query")["location"]);
+        $geo_query = $query->get("geo_query");
+        $geometry = geocode($geo_query["location"]);
         if($geometry){
-            $query->set( "geo_query",  array(
-                "latitude" => $geometry->lat,
-                "longitude" => $geometry->lon
-            ));
+            $geo_query["latitude"] = $geometry->lat;
+            $geo_query["longitude"] = $geometry->lon;
+            $query->set( "geo_query",  $geo_query);
         }
     }
 }
