@@ -86,7 +86,7 @@ It's agnostic about how you supply this data. The simplest thing to do is type i
 You could also hook into the `save_post` action to populate meta whenever you create or change a post, by adding a snippet like this to your theme's `functions.php`:
 
 ```
-function example_update_latlngs($post_id, $post){
+function example_update_latlngs($post){
     $location = get_field("location", $post);
     if(isset($location)){
         update_post_meta($post, "longitude", $location["lng"]);
