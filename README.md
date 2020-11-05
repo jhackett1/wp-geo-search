@@ -45,6 +45,23 @@ $query = new WP_Query(array(
 ))
 ```
 
+### Displaying distance in templates
+
+In the loop that includes a `geo_query`, you can use two extra functions to show distance information:
+
+- `get_the_distance()` - which returns a rounded integer for the distance away
+- `the_distance()` - which displays an approximate human-readable string
+
+`the_distance` will show one of three messages depending on whether the rounded distance is less than one, one, or greater than one. By default these are:
+
+- "Less than a mile away"
+- "About a mile away"
+- "About %s miles away"
+
+If you need to use different units or translations, can pass three [printf-formatted](https://www.php.net/manual/en/function.printf.php) strings to `the_distance()` to override these messages. Include %s to print the value.
+
+If you need the _exact_ float value, you can use `$post->distance`.
+
 ## 📍 Populating latitude and longitude data
 
 It looks for two [custom field](https://wordpress.org/support/article/custom-fields/) values with the keys `latitude` and `longitude` on your posts.
@@ -87,4 +104,3 @@ add_action('after_switch_theme', 'example_update_all_latlngs');
 ## To-do
 
 1. Add geocoding using Nominatim service
-2. Add a `the_distance()` function for use in templates

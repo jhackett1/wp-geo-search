@@ -7,6 +7,8 @@ Author: Jaye Hackett
 Plugin URI: jayehackett.com
 */
 
+require "template.php";
+
 function earth_radius($query){
     if(isset($query->get("geo_query")["units"]) && $query->get("geo_query")["units"] == "km") return 6371;
     return 3959;
