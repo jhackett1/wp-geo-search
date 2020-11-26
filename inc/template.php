@@ -1,6 +1,6 @@
 <?php
 
-function get_the_distance($post = 0, $units = 0){
+function jhgs_get_the_distance($post = 0, $units = 0){
     $post = get_post( $post );
     $distance = round($post->distance);
     if(isset($post->distance)){
@@ -8,8 +8,8 @@ function get_the_distance($post = 0, $units = 0){
     }
 }
 
-function the_distance($small = "Less than a mile away", $one = "About a mile away", $multiple = "About %s miles away" ) {
-    $distance = get_the_distance();
+function jhgs_the_distance($small = "Less than a mile away", $one = "About a mile away", $multiple = "About %s miles away" ) {
+    $distance = jhgs_get_the_distance();
     if ( strlen( $distance ) == 0 ) {
         return;
     }
