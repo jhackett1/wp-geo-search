@@ -6,6 +6,8 @@ You can use it to power location-aware apps, such as showing a user results near
 
 [Nominatim](https://nominatim.org/)'s service is used for geocoding location searches.
 
+[Here's an example](https://gist.github.com/jhackett1/0d1a68207d4e55a2ccae15af8972a8a1) of how you might use it in a theme.
+
 ## 🔎 Using it in a query
 
 Adding a `geo_query` parameter to WP_Query will add a "distance" column to the returned results, provided they have the right metadata.
