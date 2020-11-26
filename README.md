@@ -62,8 +62,8 @@ $query = new WP_Query(array(
 
 In a `WP_Query` loop that includes a `geo_query`, you can use two extra functions to show distance away:
 
-- `get_the_distance(object $post)` - which returns a rounded integer for the distance away, similar to `get_the_title()`
-- `the_distance(string $less_than_one, string $one, string $more_than_one)` - which displays an approximate human-readable string, similar to `the_title()`
+- `jhgs_get_the_distance(object $post)` - which returns a rounded integer for the distance away, similar to `get_the_title()`
+- `jhgs_the_distance(string $less_than_one, string $one, string $more_than_one)` - which displays an approximate human-readable string, similar to `the_title()`
 
 `the_distance` will show one of three messages depending on whether the rounded distance is less than one, one, or greater than one. By default these are:
 
