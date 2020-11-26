@@ -1,14 +1,14 @@
 <?php
 
-function gs_earth_radius($query){
+function jhgs_earth_radius($query){
     if(isset($query->get("geo_query")["units"]) && $query->get("geo_query")["units"] == "km") return 6371;
     return 3959;
 }
 
-function gs_handle_geo_select($select_clause, $query) {
+function jhgs_handle_geo_select($select_clause, $query) {
     if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"])){
 
-        $earth_radius = gs_earth_radius($query);
+        $earth_radius = jhgs_earth_radius($query);
 
         $lat = $query->get("geo_query")["latitude"];
         $lng = $query->get("geo_query")["longitude"];
@@ -30,10 +30,10 @@ function gs_handle_geo_select($select_clause, $query) {
 	return $select_clause;	
 }
 
-add_filter('posts_fields','gs_handle_geo_select', 10, 2);
+add_filter('posts_fields','jhgs_handle_geo_select', 10, 2);
 
 
-function gs_handle_geo_joins($join_clause, $query) {
+function jhgs_handle_geo_joins($join_clause, $query) {
     if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"])){
         $join_clause .= "       
             LEFT JOIN wp_postmeta lats
@@ -48,13 +48,13 @@ function gs_handle_geo_joins($join_clause, $query) {
 	return $join_clause;	
 }
 
-add_filter('posts_join_paged','gs_handle_geo_joins', 10, 2);
+add_filter('posts_join_paged','jhgs_handle_geo_joins', 10, 2);
 
 
-function gs_handle_geo_where($where_clause, $query){
+function jhgs_handle_geo_where($where_clause, $query){
     if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["radius"])){
 
-        $earth_radius = gs_earth_radius($query);
+        $earth_radius = jhgs_earth_radius($query);
 
         $lat = $query->get("geo_query")["latitude"];
         $lng = $query->get("geo_query")["longitude"];
@@ -72,14 +72,14 @@ function gs_handle_geo_where($where_clause, $query){
     }
 	return $where_clause;	
 }
-add_filter("posts_where", "gs_handle_geo_where", 10, 2);
+add_filter("posts_where", "jhgs_handle_geo_where", 10, 2);
 
 
-function gs_handle_geo_orderby($orderby_clause, $query) {
+function jhgs_handle_geo_orderby($orderby_clause, $query) {
     if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"])){
         $orderby_clause = "-distance DESC";
     }
     return $orderby_clause;
 }
 
-add_filter('posts_orderby', 'gs_handle_geo_orderby', 10, 2);
+add_filter('posts_orderby', 'jhgs_handle_geo_orderby', 10, 2);

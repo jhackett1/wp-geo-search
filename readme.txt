@@ -11,6 +11,8 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Add location-aware geographical search to WP_Query. You can use it to power location-aware apps, such as showing a user results near them.
 
+[Nominatim](https://nominatim.org/)'s service is used for geocoding location searches.
+
 == Description ==
 
 A plugin to add location-aware geographical search to [WP_Query](https://developer.wordpress.org/reference/classes/wp_query/).
@@ -88,7 +90,7 @@ If you need the _exact_, unrounded value, you can use `$post->distance`.
 
 [Nominatim](https://nominatim.org/)'s service is used for geocoding location searches.
 
-Using it is subject to an acceptable use policy - if you use case will involve lots of API calls, you should replace it with a paid alternative, like [Google](https://developers.google.com/maps/documentation/geocoding/overview)'s.
+Using it is subject to an [acceptable use policy](https://operations.osmfoundation.org/policies/nominatim/) - if you use case will involve lots of API calls, you should replace it with a paid alternative, like [Google](https://developers.google.com/maps/documentation/geocoding/overview)'s.
 
 ## 📍 Populating latitude and longitude data
 
