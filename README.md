@@ -65,13 +65,13 @@ In a `WP_Query` loop that includes a `geo_query`, you can use two extra function
 - `jhgs_get_the_distance(object $post)` - which returns a rounded integer for the distance away, similar to `get_the_title()`
 - `jhgs_the_distance(string $less_than_one, string $one, string $more_than_one)` - which displays an approximate human-readable string, similar to `the_title()`
 
-`the_distance` will show one of three messages depending on whether the rounded distance is less than one, one, or greater than one. By default these are:
+`jhgs_the_distance` will show one of three messages depending on whether the rounded distance is less than one, one, or greater than one. By default these are:
 
 - "Less than a mile away"
 - "About a mile away"
 - "About %s miles away"
 
-If you need to use different units or translations, can pass three [printf-formatted](https://www.php.net/manual/en/function.printf.php) strings to `the_distance()` to override these messages. Put `%s` where you want the value.
+If you need to use different units or translations, can pass three [printf-formatted](https://www.php.net/manual/en/function.printf.php) strings to `jhgs_the_distance()` to override these messages. Put `%s` where you want the value.
 
 If you need the _exact_, unrounded value, you can use `$post->distance`.
 
