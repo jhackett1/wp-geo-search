@@ -1,5 +1,7 @@
 # 🌍 WP geo search
 
+**[See it on the WP plugin directory](https://wordpress.org/plugins/wp-geo-search/)**
+
 A plugin to add location-aware geographical search to [WP_Query](https://developer.wordpress.org/reference/classes/wp_query/).
 
 You can use it to power location-aware apps, such as showing a user results near them.
