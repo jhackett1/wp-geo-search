@@ -6,6 +6,10 @@ function jhgs_earth_radius($query){
 }
 
 function jhgs_handle_geo_select($select_clause, $query) {
+	
+    global $wpdb;
+    $prefix = $wpdb->prefix;	
+	
     if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"])){
 
         $earth_radius = jhgs_earth_radius($query);
@@ -13,8 +17,8 @@ function jhgs_handle_geo_select($select_clause, $query) {
         $lat = $query->get("geo_query")["latitude"];
         $lng = $query->get("geo_query")["longitude"];
 
-        $select_clause = "
-            wp_posts.*,
+	$select_clause = "
+        " . $prefix . "posts.*,
             lats.meta_value AS latitude,
             lngs.meta_value AS longitude,
             ( $earth_radius * acos(
@@ -26,6 +30,7 @@ function jhgs_handle_geo_select($select_clause, $query) {
                 ) )
                 AS distance
         ";
+	    
     }
 	return $select_clause;	
 }
@@ -34,14 +39,18 @@ add_filter('posts_fields','jhgs_handle_geo_select', 10, 2);
 
 
 function jhgs_handle_geo_joins($join_clause, $query) {
+	
+    global $wpdb;
+    $prefix = $wpdb->prefix;	
+	
     if(isset($query->get("geo_query")["latitude"]) && isset($query->get("geo_query")["latitude"])){
-        $join_clause .= "       
-            LEFT JOIN wp_postmeta lats
-                ON wp_posts.id = lats.post_id
+	$join_clause .= "       
+            LEFT JOIN " . $prefix . "postmeta lats
+                ON " . $prefix . "posts.id = lats.post_id
                 AND lats.meta_key = 'latitude'
                 
-            LEFT JOIN wp_postmeta lngs
-                ON wp_posts.id = lngs.post_id
+            LEFT JOIN " . $prefix . "postmeta lngs
+                ON " . $prefix . "posts.id = lngs.post_id
                 AND lngs.meta_key = 'longitude'
         ";
     }
