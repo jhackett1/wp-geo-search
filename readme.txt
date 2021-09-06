@@ -3,7 +3,7 @@ Contributors: jhackett1
 Donate link: https://github.com/jhackett1/wp-geo-search
 Tags: geo, location, nominatim, distance, haversine, maps, mapping
 Requires at least: 4
-Tested up to: 5.5.3
+Tested up to: 5.8.0
 Stable tag: 4
 Requires PHP: 7.0
 License: GPLv2 or later
